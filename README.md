@@ -25,11 +25,13 @@ Using detection results from a detector that obtains 56 mAP on person.
 
 | Model | Pretrain | Resolution | AP | AR | config | log | weight |
 | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: |
-| ViT-Base | MAE | 256x192 | 75.8 | 81.1 | config | log |  |
-| ViT-Large | MAE | 256x192 | 78.3 | 83.5 | config | log |  |
-| ViT-Huge | MAE | 256x192 | 79.1 | 84.1 | config | log |  |
+| ViT-Base | MAE | 256x192 | 75.8 | 81.1 | config | [log](logs/vit-base.log.json) |  |
+| ViT-Large | MAE | 256x192 | 78.3 | 83.5 | config | [log](logs/vit-large.log.json) |  |
+| ViT-Huge | MAE | 256x192 | 79.1 | 84.1 | config | [log](logs/vit-huge.log.json) |  |
 
 ## Updates
+
+> [2022-05-06] Upload the logs for the base, large, and huge models!
 
 > [2022-04-27] Our ViTPose with ViTAE-G obtains 81.1 AP on COCO test-dev set! 
 
