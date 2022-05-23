@@ -1,0 +1,11 @@
+chumpy
+dataclasses; python_version == '3.6'
+json_tricks
+matplotlib
+munkres
+numpy
+opencv-python
+pillow
+scipy
+torchvision
+xtcocotools>=1.8
