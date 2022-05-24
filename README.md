@@ -19,7 +19,7 @@
 
 This branch contains the pytorch implementation of <a href="https://arxiv.org/abs/2204.12484">ViTPose: Simple Vision Transformer Baselines for Human Pose Estimation</a>. It obtains 81.1 AP on MS COCO Keypoint test-dev set.
 
-## Results from this repo on MS COCO val set (single task training)
+## Results from this repo on MS COCO val set (single-task training)
 
 Using detection results from a detector that obtains 56 mAP on person. The configs here are for both training and test.
 
@@ -39,7 +39,7 @@ Using detection results from a detector that obtains 56 mAP on person. The confi
 | ViTPose-L | MAE | 256x192 | 78.2 | 83.4 | [config](configs/body/2d_kpt_sview_rgb_img/topdown_heatmap/coco/ViTPose_large_simple_coco_256x192.py) | [log](logs/vitpose-l-simple.log.json) | [Onedrive](https://1drv.ms/u/s!AimBgYV7JjTlgSVS6DP2LmKwZ3sm?e=MmCvDT) |
 | ViTPose-H | MAE | 256x192 | 78.9 | 84.0 | [config](configs/body/2d_kpt_sview_rgb_img/topdown_heatmap/coco/ViTPose_huge_simple_coco_256x192.py) | [log](logs/vitpose-h-simple.log.json) | [Onedrive](https://1drv.ms/u/s!AimBgYV7JjTlgSbHyN2mjh2n2LyG?e=y0FgMK) |
 
-## Results from this repo on MS COCO val set (multi task training)
+## Results from this repo on MS COCO val set (multi-task training)
 
 Using detection results from a detector that obtains 56 mAP on person. Note the configs here are only for evaluation.
 
@@ -50,7 +50,7 @@ Using detection results from a detector that obtains 56 mAP on person. Note the 
 | ViTPose-H | COCO+AIC+MPII+CrowdPose | 256x192 | 79.8 | 84.8 | [config](configs/body/2d_kpt_sview_rgb_img/topdown_heatmap/coco/ViTPose_huge_coco_256x192.py) | [Onedrive](https://1drv.ms/u/s!AimBgYV7JjTlgS5rLeRAJiWobCdh?e=41GsDd) |
 | ViTPose-G | COCO+AIC+MPII+CrowdPose | 576x432 | 81.0 | 85.6 | | |
 
-## Results from this repo on OCHuman test set (multi task training)
+## Results from this repo on OCHuman test set (multi-task training)
 
 Using groundtruth bounding boxes. Note the configs here are only for evaluation.
 
@@ -61,7 +61,7 @@ Using groundtruth bounding boxes. Note the configs here are only for evaluation.
 | ViTPose-H | COCO+AIC+MPII+CrowdPose | 256x192 | 91.6 | 92.8 | [config](configs/body/2d_kpt_sview_rgb_img/topdown_heatmap/ochuman/ViTPose_huge_ochuman_256x192.py) | [Onedrive](https://1drv.ms/u/s!AimBgYV7JjTlgS5rLeRAJiWobCdh?e=41GsDd) |
 | ViTPose-G | COCO+AIC+MPII+CrowdPose | 576x432 | 93.3 | 94.3 | | |
 
-## Results from this repo on CrowdPose test set (multi task training)
+## Results from this repo on CrowdPose test set (multi-task training)
 
 Using YOLOv3 human detector. Note the configs here are only for evaluation.
 
@@ -72,7 +72,7 @@ Using YOLOv3 human detector. Note the configs here are only for evaluation.
 | ViTPose-H | COCO+AIC+MPII+CrowdPose | 256x192 | 76.3 | 65.6 | [config](configs/body/2d_kpt_sview_rgb_img/topdown_heatmap/crowdpose/ViTPose_huge_crowdpose_256x192.py) | [Onedrive](https://1drv.ms/u/s!AimBgYV7JjTlgS-oAvEV4MTD--Xr?e=EeW2Fu) |
 | ViTPose-G | COCO+AIC+MPII+CrowdPose | 576x432 | 78.3 | 67.9 | | |
 
-## Results from this repo on MPII val set (multi task training)
+## Results from this repo on MPII val set (multi-task training)
 
 Using groundtruth bounding boxes. Note the configs here are only for evaluation. The metric is PCKh.
 
@@ -83,7 +83,7 @@ Using groundtruth bounding boxes. Note the configs here are only for evaluation.
 | ViTPose-H | COCO+AIC+MPII+CrowdPose | 256x192 | 94.1 | [config](configs/body/2d_kpt_sview_rgb_img/topdown_heatmap/mpii/ViTPose_huge_mpii_256x192.py) | [Onedrive](https://1drv.ms/u/s!AimBgYV7JjTlgTT90XEQBKy-scIH?e=D2WhTS) |
 | ViTPose-G | COCO+AIC+MPII+CrowdPose | 576x432 | 94.3 | | |
 
-## Results from this repo on AI Challenger test set (multi task training)
+## Results from this repo on AI Challenger test set (multi-task training)
 
 Using groundtruth bounding boxes. Note the configs here are only for evaluation.
 
@@ -95,6 +95,8 @@ Using groundtruth bounding boxes. Note the configs here are only for evaluation.
 | ViTPose-G | COCO+AIC+MPII+CrowdPose | 576x432 | 43.2 | 47.1 | | |
 
 ## Updates
+
+> [2022-05-24] Upload the single-task training code, single-task pre-trained models, and multi-task pretrained models.
 
 > [2022-05-06] Upload the logs for the base, large, and huge models!
 
