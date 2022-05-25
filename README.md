@@ -2,7 +2,7 @@
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitpose-simple-vision-transformer-baselines/pose-estimation-on-coco-test-dev)](https://paperswithcode.com/sota/pose-estimation-on-coco-test-dev?p=vitpose-simple-vision-transformer-baselines)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitpose-simple-vision-transformer-baselines/pose-estimation-on-aic)](https://paperswithcode.com/sota/pose-estimation-on-aic?p=vitpose-simple-vision-transformer-baselines)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitpose-simple-vision-transformer-baselines/pose-estimation-on-aic)](https://paperswithcode.com/sota/pose-estimation-on-aic?p=vitpose-simple-vision-transformer-baselines)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitpose-simple-vision-transformer-baselines/pose-estimation-on-crowdpose)](https://paperswithcode.com/sota/pose-estimation-on-crowdpose?p=vitpose-simple-vision-transformer-baselines)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitpose-simple-vision-transformer-baselines/pose-estimation-on-ochuman)](https://paperswithcode.com/sota/pose-estimation-on-ochuman?p=vitpose-simple-vision-transformer-baselines)
 
 <p align="center">
