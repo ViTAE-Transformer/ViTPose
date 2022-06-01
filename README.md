@@ -22,6 +22,8 @@
 
 This branch contains the pytorch implementation of <a href="https://arxiv.org/abs/2204.12484">ViTPose: Simple Vision Transformer Baselines for Human Pose Estimation</a>. It obtains 81.1 AP on MS COCO Keypoint test-dev set.
 
+<img src="figures/Throughput.png" class="left" width='80%'>
+
 ## Results from this repo on MS COCO val set (single-task training)
 
 Using detection results from a detector that obtains 56 mAP on person. The configs here are for both training and test.
