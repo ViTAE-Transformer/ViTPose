@@ -24,6 +24,10 @@ This branch contains the pytorch implementation of <a href="https://arxiv.org/ab
 
 <img src="figures/Throughput.png" class="left" width='80%'>
 
+## Web Demo
+
+- Integrated into [Huggingface Spaces 🤗](https://huggingface.co/spaces) using [Gradio](https://github.com/gradio-app/gradio). Try out the Web Demo for video: [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/hysts/ViTPose_video) and images [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/Gradio-Blocks/ViTPose)
+
 ## Results from this repo on MS COCO val set (single-task training)
 
 Using detection results from a detector that obtains 56 mAP on person. The configs here are for both training and test.
