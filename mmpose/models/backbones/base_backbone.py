@@ -14,7 +14,7 @@ class BaseBackbone(nn.Module, metaclass=ABCMeta):
     inherits this class should at least define its own `forward` function.
     """
 
-    def init_weights(self, pretrained=None, patch_padding='pad'):
+    def init_weights(self, pretrained=None, patch_padding='pad', part_features=None):
         """Init backbone weights.
 
         Args:
@@ -25,7 +25,7 @@ class BaseBackbone(nn.Module, metaclass=ABCMeta):
         """
         if isinstance(pretrained, str):
             logger = logging.getLogger()
-            load_checkpoint(self, pretrained, strict=False, logger=logger, patch_padding=patch_padding)
+            load_checkpoint(self, pretrained, strict=False, logger=logger, patch_padding=patch_padding, part_features=part_features)
         elif pretrained is None:
             # use default initializer or customized initializer in subclasses
             pass

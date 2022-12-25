@@ -25,6 +25,8 @@ from mmcv.runner import get_dist_info
 from scipy import interpolate
 import numpy as np
 import math
+import re
+import copy
 
 ENV_MMCV_HOME = 'MMCV_HOME'
 ENV_XDG_CACHE_HOME = 'XDG_CACHE_HOME'
@@ -313,6 +315,7 @@ def load_checkpoint(model,
                     strict=False,
                     logger=None,
                     patch_padding='pad',
+                    part_features=None
                     ):
     """Load checkpoint from a file or URI.
 
@@ -389,9 +392,19 @@ def load_checkpoint(model,
         pos_tokens = pos_tokens.permute(0, 2, 3, 1).flatten(1, 2)
         new_pos_embed = torch.cat((extra_tokens, pos_tokens), dim=1)
         state_dict['pos_embed'] = new_pos_embed
+    
+    new_state_dict = copy.deepcopy(state_dict)
+    if part_features is not None:
+        current_keys = list(model.state_dict().keys())
+        for key in current_keys:
+            if "mlp.experts" in key:
+                source_key = re.sub(r'experts.\d+.', 'fc2.', key)
+                new_state_dict[key] = state_dict[source_key][-part_features:]
+            elif 'fc2' in key:
+                new_state_dict[key] = state_dict[key][:-part_features]
 
     # load state_dict
-    load_state_dict(model, state_dict, strict, logger)
+    load_state_dict(model, new_state_dict, strict, logger)
     return checkpoint
 
 

@@ -633,8 +633,16 @@ class TopDownGenerateTarget:
             raise ValueError(
                 f'Encoding approach {self.encoding} is not supported!')
 
+        if results['ann_info'].get('max_num_joints', None) is not None:
+            W, H = results['ann_info']['heatmap_size']
+            padded_length = int(results['ann_info'].get('max_num_joints') - results['ann_info'].get('num_joints'))
+            target_weight = np.concatenate([target_weight, np.zeros((padded_length, 1), dtype=np.float32)], 0)
+            target = np.concatenate([target, np.zeros((padded_length, H, W), dtype=np.float32)], 0)
+
         results['target'] = target
         results['target_weight'] = target_weight
+
+        results['dataset_idx'] = results['ann_info'].get('dataset_idx', 0)
 
         return results
 
