@@ -11,8 +11,8 @@ evaluation = dict(interval=10, metric='mAP', save_best='AP')
 optimizer = dict(type='AdamW', lr=1e-3, betas=(0.9, 0.999), weight_decay=0.1,
                  constructor='LayerDecayOptimizerConstructor', 
                  paramwise_cfg=dict(
-                                    num_layers=24, 
-                                    layer_decay_rate=0.8,
+                                    num_layers=12, 
+                                    layer_decay_rate=0.9,
                                     custom_keys={
                                             'bias': dict(decay_multi=0.),
                                             'pos_embed': dict(decay_mult=0.),
@@ -87,20 +87,20 @@ model = dict(
         type='ViTMoE',
         img_size=(256, 192),
         patch_size=16,
-        embed_dim=1024,
-        depth=24,
-        num_heads=16,
+        embed_dim=384,
+        depth=12,
+        num_heads=12,
         ratio=1,
         use_checkpoint=False,
         mlp_ratio=4,
         qkv_bias=True,
-        drop_path_rate=0.5,
+        drop_path_rate=0.3,
         num_expert=6,
-        part_features=256
+        part_features=192
     ),
     keypoint_head=dict(
         type='TopdownHeatmapSimpleHead',
-        in_channels=1024,
+        in_channels=384,
         num_deconv_layers=2,
         num_deconv_filters=(256, 256),
         num_deconv_kernels=(4, 4),
@@ -110,7 +110,7 @@ model = dict(
     associate_keypoint_head=[
         dict(
             type='TopdownHeatmapSimpleHead',
-            in_channels=1024,
+            in_channels=384,
             num_deconv_layers=2,
             num_deconv_filters=(256, 256),
             num_deconv_kernels=(4, 4),
@@ -119,7 +119,7 @@ model = dict(
             loss_keypoint=dict(type='JointsMSELoss', use_target_weight=True)),
         dict(
             type='TopdownHeatmapSimpleHead',
-            in_channels=1024,
+            in_channels=384,
             num_deconv_layers=2,
             num_deconv_filters=(256, 256),
             num_deconv_kernels=(4, 4),
@@ -128,7 +128,7 @@ model = dict(
             loss_keypoint=dict(type='JointsMSELoss', use_target_weight=True)),
         dict(
             type='TopdownHeatmapSimpleHead',
-            in_channels=1024,
+            in_channels=384,
             num_deconv_layers=2,
             num_deconv_filters=(256, 256),
             num_deconv_kernels=(4, 4),
@@ -137,7 +137,7 @@ model = dict(
             loss_keypoint=dict(type='JointsMSELoss', use_target_weight=True)),
         dict(
             type='TopdownHeatmapSimpleHead',
-            in_channels=1024,
+            in_channels=384,
             num_deconv_layers=2,
             num_deconv_filters=(256, 256),
             num_deconv_kernels=(4, 4),
@@ -146,7 +146,7 @@ model = dict(
             loss_keypoint=dict(type='JointsMSELoss', use_target_weight=True)),
         dict(
             type='TopdownHeatmapSimpleHead',
-            in_channels=1024,
+            in_channels=384,
             num_deconv_layers=2,
             num_deconv_filters=(256, 256),
             num_deconv_kernels=(4, 4),

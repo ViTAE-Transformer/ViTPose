@@ -133,15 +133,6 @@ model = dict(
             num_deconv_filters=(256, 256),
             num_deconv_kernels=(4, 4),
             extra=dict(final_conv_kernel=1, ),
-            out_channels=crowdpose_channel_cfg['num_output_channels'],
-            loss_keypoint=dict(type='JointsMSELoss', use_target_weight=True)),
-        dict(
-            type='TopdownHeatmapSimpleHead',
-            in_channels=1280,
-            num_deconv_layers=2,
-            num_deconv_filters=(256, 256),
-            num_deconv_kernels=(4, 4),
-            extra=dict(final_conv_kernel=1, ),
             out_channels=ap10k_channel_cfg['num_output_channels'],
             loss_keypoint=dict(type='JointsMSELoss', use_target_weight=True)),
         dict(

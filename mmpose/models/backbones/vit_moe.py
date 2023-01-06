@@ -171,7 +171,8 @@ class Block(nn.Module):
         self.drop_path = DropPath(drop_path) if drop_path > 0. else nn.Identity()
         self.norm2 = norm_layer(dim)
         mlp_hidden_dim = int(dim * mlp_ratio)
-        self.mlp = MoEMlp(num_expert=num_expert, in_features=dim, hidden_features=mlp_hidden_dim, act_layer=act_layer, drop=drop, mode=mode)
+        self.mlp = MoEMlp(num_expert=num_expert, in_features=dim, hidden_features=mlp_hidden_dim, 
+                            act_layer=act_layer, drop=drop, part_features=part_features)
 
     def forward(self, x, indices=None):
 
