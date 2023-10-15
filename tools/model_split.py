@@ -95,7 +95,7 @@ def main():
         # remove expert part
         keys = new_ckpt['state_dict'].keys()
         for key in list(keys):
-            if 'expert' in keys:
+            if 'expert' in key:
                 new_ckpt['state_dict'].pop(key)
             
         torch.save(new_ckpt, os.path.join(args.target, f'{names[i]}.pth'))
