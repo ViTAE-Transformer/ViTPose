@@ -18,12 +18,12 @@ def main():
     parser = ArgumentParser()
     parser.add_argument('pose_config', help='Config file for detection')
     parser.add_argument('pose_checkpoint', help='Checkpoint file')
-    parser.add_argument('--img-root', type=str, default='', help='Image root')
-    parser.add_argument(
-        '--json-file',
-        type=str,
-        default='',
-        help='Json file containing image info.')
+    parser.add_argument('--img-path', type=str, default='', help='Image root')
+    # parser.add_argument(
+    #     '--json-file',
+    #     type=str,
+    #     default='',
+    #     help='Json file containing image info.')
     parser.add_argument(
         '--show',
         action='store_true',
@@ -54,8 +54,10 @@ def main():
 
     assert args.show or (args.out_img_root != '')
 
-    coco = COCO(args.json_file)
+    # coco = COCO(args.json_file)
     # build the pose model from a config file and a checkpoint file
+    print(args.pose_config)
+
     pose_model = init_pose_model(
         args.pose_config, args.pose_checkpoint, device=args.device.lower())
 
@@ -69,7 +71,8 @@ def main():
     else:
         dataset_info = DatasetInfo(dataset_info)
 
-    img_keys = list(coco.imgs.keys())
+    # img_keys = list(coco.imgs.keys())
+    img_keys = [0]
 
     # optional
     return_heatmap = False
@@ -81,24 +84,25 @@ def main():
     for i in range(len(img_keys)):
         # get bounding box annotations
         image_id = img_keys[i]
-        image = coco.loadImgs(image_id)[0]
-        image_name = os.path.join(args.img_root, image['file_name'])
-        ann_ids = coco.getAnnIds(image_id)
+        # image = coco.loadImgs(image_id)[0]
+        # image_name = os.path.join(args.img_root, image['file_name'])
+        image_name = args.img_path
+        # ann_ids = coco.getAnnIds(image_id)
 
-        # make person bounding boxes
-        person_results = []
-        for ann_id in ann_ids:
-            person = {}
-            ann = coco.anns[ann_id]
-            # bbox format is 'xywh'
-            person['bbox'] = ann['bbox']
-            person_results.append(person)
+        # # make person bounding boxes
+        # person_results = []
+        # for ann_id in ann_ids:
+        #     person = {}
+        #     ann = coco.anns[ann_id]
+        #     # bbox format is 'xywh'
+        #     person['bbox'] = ann['bbox']
+        #     person_results.append(person)
 
         # test a single image, with a list of bboxes
         pose_results, returned_outputs = inference_top_down_pose_model(
             pose_model,
             image_name,
-            person_results,
+            person_results=None,
             bbox_thr=None,
             format='xywh',
             dataset=dataset,
@@ -111,7 +115,7 @@ def main():
         else:
             os.makedirs(args.out_img_root, exist_ok=True)
             out_file = os.path.join(args.out_img_root, f'vis_{i}.jpg')
-
+        import pdb; pdb.set_trace()
         vis_pose_result(
             pose_model,
             image_name,
