@@ -41,8 +41,7 @@ def bbox_xywh2xyxy(bbox_xywh: np.ndarray) -> np.ndarray:
     return bbox_xyxy
 
 
-def bbox_xyxy2cs(bbox: np.ndarray,
-                 padding: float = 1.) -> Tuple[np.ndarray, np.ndarray]:
+def bbox_xyxy2cs(bbox: np.ndarray, padding: float = 1.0) -> Tuple[np.ndarray, np.ndarray]:
     """Transform the bbox format from (x,y,w,h) into (center, scale)
 
     Args:
@@ -73,8 +72,7 @@ def bbox_xyxy2cs(bbox: np.ndarray,
     return center, scale
 
 
-def bbox_xywh2cs(bbox: np.ndarray,
-                 padding: float = 1.) -> Tuple[np.ndarray, np.ndarray]:
+def bbox_xywh2cs(bbox: np.ndarray, padding: float = 1.0) -> Tuple[np.ndarray, np.ndarray]:
     """Transform the bbox format from (x,y,w,h) into (center, scale)
 
     Args:
@@ -107,9 +105,7 @@ def bbox_xywh2cs(bbox: np.ndarray,
     return center, scale
 
 
-def bbox_cs2xyxy(center: np.ndarray,
-                 scale: np.ndarray,
-                 padding: float = 1.) -> np.ndarray:
+def bbox_cs2xyxy(center: np.ndarray, scale: np.ndarray, padding: float = 1.0) -> np.ndarray:
     """Transform the bbox format from (center, scale) to (x1,y1,x2,y2).
 
     Args:
@@ -139,9 +135,7 @@ def bbox_cs2xyxy(center: np.ndarray,
     return bbox
 
 
-def bbox_cs2xywh(center: np.ndarray,
-                 scale: np.ndarray,
-                 padding: float = 1.) -> np.ndarray:
+def bbox_cs2xywh(center: np.ndarray, scale: np.ndarray, padding: float = 1.0) -> np.ndarray:
     """Transform the bbox format from (center, scale) to (x,y,w,h).
 
     Args:
@@ -268,10 +262,9 @@ def bbox_clip_border(bbox: np.ndarray, shape: Tuple[int, int]) -> np.ndarray:
     return bbox
 
 
-def flip_bbox(bbox: np.ndarray,
-              image_size: Tuple[int, int],
-              bbox_format: str = 'xywh',
-              direction: str = 'horizontal') -> np.ndarray:
+def flip_bbox(
+    bbox: np.ndarray, image_size: Tuple[int, int], bbox_format: str = "xywh", direction: str = "horizontal"
+) -> np.ndarray:
     """Flip the bbox in the given direction.
 
     Args:
@@ -287,37 +280,34 @@ def flip_bbox(bbox: np.ndarray,
     Returns:
         np.ndarray: The flipped bounding boxes.
     """
-    direction_options = {'horizontal', 'vertical', 'diagonal'}
+    direction_options = {"horizontal", "vertical", "diagonal"}
     assert direction in direction_options, (
-        f'Invalid flipping direction "{direction}". '
-        f'Options are {direction_options}')
+        f'Invalid flipping direction "{direction}". ' f"Options are {direction_options}"
+    )
 
-    format_options = {'xywh', 'xyxy', 'center'}
-    assert bbox_format in format_options, (
-        f'Invalid bbox format "{bbox_format}". '
-        f'Options are {format_options}')
+    format_options = {"xywh", "xyxy", "center"}
+    assert bbox_format in format_options, f'Invalid bbox format "{bbox_format}". ' f"Options are {format_options}"
 
     bbox_flipped = bbox.copy()
     w, h = image_size
 
     # TODO: consider using "integer corner" coordinate system
-    if direction == 'horizontal':
-        if bbox_format == 'xywh' or bbox_format == 'center':
+    if direction == "horizontal":
+        if bbox_format == "xywh" or bbox_format == "center":
             bbox_flipped[..., 0] = w - bbox[..., 0] - 1
-        elif bbox_format == 'xyxy':
+        elif bbox_format == "xyxy":
             bbox_flipped[..., ::2] = w - bbox[..., -2::-2] - 1
-    elif direction == 'vertical':
-        if bbox_format == 'xywh' or bbox_format == 'center':
+    elif direction == "vertical":
+        if bbox_format == "xywh" or bbox_format == "center":
             bbox_flipped[..., 1] = h - bbox[..., 1] - 1
-        elif bbox_format == 'xyxy':
+        elif bbox_format == "xyxy":
             bbox_flipped[..., 1::2] = h - bbox[..., ::-2] - 1
-    elif direction == 'diagonal':
-        if bbox_format == 'xywh' or bbox_format == 'center':
+    elif direction == "diagonal":
+        if bbox_format == "xywh" or bbox_format == "center":
             bbox_flipped[..., :2] = [w, h] - bbox[..., :2] - 1
-        elif bbox_format == 'xyxy':
+        elif bbox_format == "xyxy":
             bbox_flipped[...] = [w, h, w, h] - bbox - 1
-            bbox_flipped = np.concatenate(
-                (bbox_flipped[..., 2:], bbox_flipped[..., :2]), axis=-1)
+            bbox_flipped = np.concatenate((bbox_flipped[..., 2:], bbox_flipped[..., :2]), axis=-1)
 
     return bbox_flipped
 
@@ -358,14 +348,14 @@ def get_udp_warp_matrix(
     scale_y = (output_size[1] - 1) / scale[1]
     warp_mat[0, 0] = math.cos(rot_rad) * scale_x
     warp_mat[0, 1] = -math.sin(rot_rad) * scale_x
-    warp_mat[0, 2] = scale_x * (-0.5 * input_size[0] * math.cos(rot_rad) +
-                                0.5 * input_size[1] * math.sin(rot_rad) +
-                                0.5 * scale[0])
+    warp_mat[0, 2] = scale_x * (
+        -0.5 * input_size[0] * math.cos(rot_rad) + 0.5 * input_size[1] * math.sin(rot_rad) + 0.5 * scale[0]
+    )
     warp_mat[1, 0] = math.sin(rot_rad) * scale_y
     warp_mat[1, 1] = math.cos(rot_rad) * scale_y
-    warp_mat[1, 2] = scale_y * (-0.5 * input_size[0] * math.sin(rot_rad) -
-                                0.5 * input_size[1] * math.cos(rot_rad) +
-                                0.5 * scale[1])
+    warp_mat[1, 2] = scale_y * (
+        -0.5 * input_size[0] * math.sin(rot_rad) - 0.5 * input_size[1] * math.cos(rot_rad) + 0.5 * scale[1]
+    )
     return warp_mat
 
 
@@ -374,7 +364,7 @@ def get_warp_matrix(
     scale: np.ndarray,
     rot: float,
     output_size: Tuple[int, int],
-    shift: Tuple[float, float] = (0., 0.),
+    shift: Tuple[float, float] = (0.0, 0.0),
     inv: bool = False,
     fix_aspect_ratio: bool = True,
 ) -> np.ndarray:
@@ -408,8 +398,8 @@ def get_warp_matrix(
     dst_w, dst_h = output_size[:2]
 
     rot_rad = np.deg2rad(rot)
-    src_dir = _rotate_point(np.array([src_w * -0.5, 0.]), rot_rad)
-    dst_dir = np.array([dst_w * -0.5, 0.])
+    src_dir = _rotate_point(np.array([src_w * -0.5, 0.0]), rot_rad)
+    dst_dir = np.array([dst_w * -0.5, 0.0])
 
     src = np.zeros((3, 2), dtype=np.float32)
     src[0, :] = center + scale * shift
@@ -423,8 +413,8 @@ def get_warp_matrix(
         src[2, :] = _get_3rd_point(src[0, :], src[1, :])
         dst[2, :] = _get_3rd_point(dst[0, :], dst[1, :])
     else:
-        src_dir_2 = _rotate_point(np.array([0., src_h * -0.5]), rot_rad)
-        dst_dir_2 = np.array([0., dst_h * -0.5])
+        src_dir_2 = _rotate_point(np.array([0.0, src_h * -0.5]), rot_rad)
+        dst_dir_2 = np.array([0.0, dst_h * -0.5])
         src[2, :] = center + src_dir_2 + scale * shift
         dst[2, :] = np.array([dst_w * 0.5, dst_h * 0.5]) + dst_dir_2
 
@@ -435,9 +425,9 @@ def get_warp_matrix(
     return warp_mat
 
 
-def get_pers_warp_matrix(center: np.ndarray, translate: np.ndarray,
-                         scale: float, rot: float,
-                         shear: np.ndarray) -> np.ndarray:
+def get_pers_warp_matrix(
+    center: np.ndarray, translate: np.ndarray, scale: float, rot: float, shear: np.ndarray
+) -> np.ndarray:
     """Compute a perspective warp matrix based on specified transformations.
 
     Args:
@@ -459,33 +449,25 @@ def get_pers_warp_matrix(center: np.ndarray, translate: np.ndarray,
         >>> warp_matrix = get_pers_warp_matrix(center, translate,
                                                scale, rot, shear)
     """
-    translate_mat = np.array([[1, 0, translate[0] + center[0]],
-                              [0, 1, translate[1] + center[1]], [0, 0, 1]],
-                             dtype=np.float32)
+    translate_mat = np.array(
+        [[1, 0, translate[0] + center[0]], [0, 1, translate[1] + center[1]], [0, 0, 1]], dtype=np.float32
+    )
 
     shear_x = math.radians(shear[0])
     shear_y = math.radians(shear[1])
-    shear_mat = np.array([[1, np.tan(shear_x), 0], [np.tan(shear_y), 1, 0],
-                          [0, 0, 1]],
-                         dtype=np.float32)
+    shear_mat = np.array([[1, np.tan(shear_x), 0], [np.tan(shear_y), 1, 0], [0, 0, 1]], dtype=np.float32)
 
     rotate_angle = math.radians(rot)
-    rotate_mat = np.array([[np.cos(rotate_angle), -np.sin(rotate_angle), 0],
-                           [np.sin(rotate_angle),
-                            np.cos(rotate_angle), 0], [0, 0, 1]],
-                          dtype=np.float32)
+    rotate_mat = np.array(
+        [[np.cos(rotate_angle), -np.sin(rotate_angle), 0], [np.sin(rotate_angle), np.cos(rotate_angle), 0], [0, 0, 1]],
+        dtype=np.float32,
+    )
 
-    scale_mat = np.array([[scale, 0, 0], [0, scale, 0], [0, 0, 1]],
-                         dtype=np.float32)
+    scale_mat = np.array([[scale, 0, 0], [0, scale, 0], [0, 0, 1]], dtype=np.float32)
 
-    recover_center_mat = np.array([[1, 0, -center[0]], [0, 1, -center[1]],
-                                   [0, 0, 1]],
-                                  dtype=np.float32)
+    recover_center_mat = np.array([[1, 0, -center[0]], [0, 1, -center[1]], [0, 0, 1]], dtype=np.float32)
 
-    warp_matrix = np.dot(
-        np.dot(
-            np.dot(np.dot(translate_mat, shear_mat), rotate_mat), scale_mat),
-        recover_center_mat)
+    warp_matrix = np.dot(np.dot(np.dot(np.dot(translate_mat, shear_mat), rotate_mat), scale_mat), recover_center_mat)
 
     return warp_matrix
 
@@ -523,3 +505,92 @@ def _get_3rd_point(a: np.ndarray, b: np.ndarray):
     direction = a - b
     c = b + np.r_[-direction[1], direction[0]]
     return c
+
+
+def warp_affine_joints(joints, mat):
+    """Apply affine transformation defined by the transform matrix on the
+    joints.
+
+    Args:
+        joints (np.ndarray[..., 2]): Origin coordinate of joints.
+        mat (np.ndarray[3, 2]): The affine matrix.
+
+    Returns:
+        np.ndarray[..., 2]: Result coordinate of joints.
+    """
+    joints = np.array(joints)
+    shape = joints.shape
+    joints = joints.reshape(-1, 2)
+    return np.dot(np.concatenate((joints, joints[:, 0:1] * 0 + 1), axis=1), mat.T).reshape(shape)
+
+
+def rotate_point(pt, angle_rad):
+    """Rotate a point by an angle.
+
+    Args:
+        pt (list[float]): 2 dimensional point to be rotated
+        angle_rad (float): rotation angle by radian
+
+    Returns:
+        list[float]: Rotated point.
+    """
+    assert len(pt) == 2
+    sn, cs = np.sin(angle_rad), np.cos(angle_rad)
+    new_x = pt[0] * cs - pt[1] * sn
+    new_y = pt[0] * sn + pt[1] * cs
+    rotated_pt = [new_x, new_y]
+
+    return rotated_pt
+
+
+def get_affine_transform(center, scale, rot, output_size, shift=(0.0, 0.0), inv=False):
+    """Get the affine transform matrix, given the center/scale/rot/output_size.
+
+    Args:
+        center (np.ndarray[2, ]): Center of the bounding box (x, y).
+        scale (np.ndarray[2, ]): Scale of the bounding box
+            wrt [width, height].
+        rot (float): Rotation angle (degree).
+        output_size (np.ndarray[2, ] | list(2,)): Size of the
+            destination heatmaps.
+        shift (0-100%): Shift translation ratio wrt the width/height.
+            Default (0., 0.).
+        inv (bool): Option to inverse the affine transform direction.
+            (inv=False: src->dst or inv=True: dst->src)
+
+    Returns:
+        np.ndarray: The transform matrix.
+    """
+    assert len(center) == 2
+    assert len(scale) == 2
+    assert len(output_size) == 2
+    assert len(shift) == 2
+
+    # pixel_std is 200.
+    scale_tmp = scale * 200.0
+
+    shift = np.array(shift)
+    src_w = scale_tmp[0]
+    dst_w = output_size[0]
+    dst_h = output_size[1]
+
+    rot_rad = np.pi * rot / 180
+    src_dir = rotate_point([0.0, src_w * -0.5], rot_rad)
+    dst_dir = np.array([0.0, dst_w * -0.5])
+
+    src = np.zeros((3, 2), dtype=np.float32)
+    src[0, :] = center + scale_tmp * shift
+    src[1, :] = center + src_dir + scale_tmp * shift
+    src[2, :] = _get_3rd_point(src[0, :], src[1, :])
+
+    dst = np.zeros((3, 2), dtype=np.float32)
+    dst[0, :] = [dst_w * 0.5, dst_h * 0.5]
+    dst[1, :] = np.array([dst_w * 0.5, dst_h * 0.5]) + dst_dir
+    dst[2, :] = _get_3rd_point(dst[0, :], dst[1, :])
+
+    if inv:
+        trans = cv2.getAffineTransform(np.float32(dst), np.float32(src))
+    else:
+        trans = cv2.getAffineTransform(np.float32(src), np.float32(dst))
+
+    return trans

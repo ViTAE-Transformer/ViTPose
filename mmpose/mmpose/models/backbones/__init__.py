@@ -29,6 +29,8 @@ from .v2v_net import V2VNet
 from .vgg import VGG
 from .vipnas_mbv3 import ViPNAS_MobileNetV3
 from .vipnas_resnet import ViPNAS_ResNet
+from .vit import ViT
+from .vit_moe import ViTMoE
 
 __all__ = [
     'AlexNet', 'HourglassNet', 'HourglassAENet', 'HRNet', 'MobileNetV2',
