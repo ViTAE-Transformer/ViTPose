@@ -116,7 +116,7 @@ class LoadImageFromFile:
         if self.file_client is None:
             self.file_client = mmengine.FileClient(**self.file_client_args)
 
-        image_file = results.get("image_file", None)
+        image_file = results.get("img_path", None)
 
         if isinstance(image_file, (list, tuple)):
             # Load images from a list of paths
