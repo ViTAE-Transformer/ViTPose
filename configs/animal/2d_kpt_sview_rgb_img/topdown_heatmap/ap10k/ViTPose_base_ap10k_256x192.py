@@ -127,30 +127,30 @@ val_pipeline = [
 
 test_pipeline = val_pipeline
 
-data_root = 'data/apt36k'
+data_root = 'data/ap10k'
 data = dict(
-    samples_per_gpu=32,
+    samples_per_gpu=64,
     workers_per_gpu=4,
     val_dataloader=dict(samples_per_gpu=32),
     test_dataloader=dict(samples_per_gpu=32),
     train=dict(
         type='AnimalAP10KDataset',
-        ann_file=f'{data_root}/annotations/train_annotations_1.json',
-        img_prefix=f'{data_root}/',
+        ann_file=f'{data_root}/annotations/ap10k-train-split1.json',
+        img_prefix=f'{data_root}/data/',
         data_cfg=data_cfg,
         pipeline=train_pipeline,
         dataset_info={{_base_.dataset_info}}),
     val=dict(
         type='AnimalAP10KDataset',
-        ann_file=f'{data_root}/annotations/val_annotations_1.json',
-        img_prefix=f'{data_root}/',
+        ann_file=f'{data_root}/annotations/ap10k-val-split1.json',
+        img_prefix=f'{data_root}/data/',
         data_cfg=data_cfg,
         pipeline=val_pipeline,
         dataset_info={{_base_.dataset_info}}),
     test=dict(
         type='AnimalAP10KDataset',
-        ann_file=f'{data_root}/annotations/val_annotations_1.json',
-        img_prefix=f'{data_root}/',
+        ann_file=f'{data_root}/annotations/ap10k-test-split1.json',
+        img_prefix=f'{data_root}/data/',
         data_cfg=data_cfg,
         pipeline=val_pipeline,
         dataset_info={{_base_.dataset_info}}),
