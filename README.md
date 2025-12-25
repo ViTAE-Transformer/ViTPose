@@ -1,11 +1,12 @@
-<h1 align="left">ViTPose: Simple Vision Transformer Baselines for Human Pose Estimation</h1> 
+<h1 align="left">ViTPose / ViTPose++: Vision Transformer for Generic Body Pose Estimation</h1> 
 <p align="center">
 <a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/fbb10d319d44f8c3b4720873e4177c65-Abstract-Conference.html">
-  <img src="https://img.shields.io/badge/NeurIPS_2022-ViTPose-8E44AD?style=flat-square" alt="NeurIPS 2022">
+  <img src="https://img.shields.io/badge/NeurIPS_2022-ViTPose-8E44AD" alt="NeurIPS 2022">
 </a>
 <a href="https://ieeexplore.ieee.org/abstract/document/10308645">
-  <img src="https://img.shields.io/badge/TPAMI_2023-ViTPose%2B%2B-00629B?style=flat-square" alt="TPAMI 2023">
+  <img src="https://img.shields.io/badge/TPAMI_2023-ViTPose%2B%2B-00629B" alt="TPAMI 2023">
 </a>
+
 </p>
 <p align="center">
   <a href="#Results">Results</a> |
@@ -22,7 +23,7 @@
 <a href="https://giphy.com/gifs/r3GaZz7H1H6zpuIvPI/fullscreen"><img src="https://media.giphy.com/media/13oe6zo6b2B7CdsOac/giphy.gif"></a>    <a href="https://giphy.com/gifs/FjzrGJxsOzZAXaW7Vi/fullscreen"><img src="https://media.giphy.com/media/4JLERHxOEgH0tt5DZO/giphy.gif"></a>
 </p>
 
-This branch contains the pytorch implementation of <a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/fbb10d319d44f8c3b4720873e4177c65-Abstract-Conference.html">ViTPose: Simple Vision Transformer Baselines for Human Pose Estimation</a> and <a href="https://ieeexplore.ieee.org/abstract/document/10308645">ViTPose++: Vision Transformer Foundation Model for Generic Body Pose Estimation</a>. It obtains 81.1 AP on MS COCO Keypoint test-dev set.
+This branch contains the pytorch implementation of <a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/fbb10d319d44f8c3b4720873e4177c65-Abstract-Conference.html">ViTPose: Simple Vision Transformer Baselines for Human Pose Estimation</a> and <a href="https://ieeexplore.ieee.org/abstract/document/10308645">ViTPose++: Vision Transformer for Generic Body Pose Estimation</a>. It obtains 81.1 AP on MS COCO Keypoint test-dev set.
 
 <img src="figures/Throughput.png" class="left" width='80%'>
 
